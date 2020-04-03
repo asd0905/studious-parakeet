@@ -1,0 +1,43 @@
+$sam-stream-list-h4-color: #888888;
+$sam-stream-list-h3-color: #333333;
+$sam-stream-list-width: 260px;
+
+@mixin clearfix() {
+	//*zoom: 1;
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin flexible-image($number) {
+	padding-bottom: $number;
+	position: relative;
+	img {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+@mixin white-space-ellipsis() {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin multi-line-ellipsis($line-cnt, $line-height) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $line-cnt;
+	-webkit-box-orient: vertical;
+	word-wrap:break-word;
+	line-height: $line-height;
+	height: $line-height * $line-cnt;
+}

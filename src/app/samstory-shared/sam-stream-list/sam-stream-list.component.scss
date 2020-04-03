@@ -1,0 +1,85 @@
+@import './src/scss/_mixin';
+
+.sam-stream-list {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1110px;
+	@include clearfix();
+	.stream-list {
+		margin: 0 -10px;
+		& > div {
+			//width: $sam-stream-list-width;
+			border: 1px solid #e1e1e1;
+			width: calc(100% / 4 - 20px);
+			float: left;
+			margin: 10px;
+			& > a {
+				text-decoration: none;
+				.img {
+					@include flexible-image(70%);
+				}
+				.txt {
+					padding: 10px 15px;
+					h4 {
+						img {
+							width: 22px;
+							height: 21px;
+							vertical-align: middle;
+						}
+						font-size: 12px;
+						color: $sam-stream-list-h4-color;
+						@include white-space-ellipsis();
+						&:after {
+							width: 20px;
+							height: 1px;
+							background-color: #000000;
+							display: block;
+							content: '';
+							margin: 10px 0;
+						}
+					}
+					h3 {
+						font-size: 15px;
+						color: $sam-stream-list-h3-color;
+						@include multi-line-ellipsis(3, 24px);
+					}
+				}
+			}
+			.info {
+				padding: 7px 15px 10px;
+				span {
+					color: #6c6c6c;
+					font-size: 13px;
+					max-width: calc(100%/3);
+					padding-right: 8px;
+					display: inline-block;
+					@include white-space-ellipsis();
+					img {
+						vertical-align: middle;
+						margin-top: -3px;
+					}
+				}
+			}
+		}
+		@media screen and (max-width: 992px) {
+			& > div {
+				width: calc(100% / 3 - 20px);
+			}
+		}
+		@media screen and (max-width: 768px) {
+			& > div {
+				width: calc(100% / 2 - 20px);
+			}
+		}
+		@media screen and (max-width: 576px) {
+			margin: 0;
+			& > div {
+				width: 100%;
+				margin: 0 0 10px;
+			}
+		}
+	}
+
+}

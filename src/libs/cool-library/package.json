@@ -1,0 +1,15 @@
+{
+  "_name": "cool-library-js",
+  "name": "cool-library",
+  "version": "0.2.9",
+  "description": "cool-library - TypeScript library setup for multiple compilation targets using tsc and webpack",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "sideEffects": false,
+  "author": "Niney",
+  "license": "MIT",
+  "peerDependencies": {
+    "tslib": ">=1.9.0"
+  },
+  "dependencies": {}
+}
