@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class StreamsResolverService implements Resolve<any>{
+export class StreamsResolverService implements Resolve<any> {
 
     constructor(
         private streamsService: StreamsService
@@ -14,6 +14,7 @@ export class StreamsResolverService implements Resolve<any>{
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.streamsService.loadStreams();
+        const defaultStreamSize = route.data.defaultStreamSize;
+        return this.streamsService.loadStreams(`size=${defaultStreamSize}`);
     }
 }
