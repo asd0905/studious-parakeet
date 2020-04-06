@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     samstoryBackUrl: 'http://samstory.coolschool.co.kr',
     samstoryUrl: 'http://samstory.coolschool.co.kr',
-    searchUrl: 'http://search.coolschool.co.kr'
+    searchUrl: 'http://dev-search.coolschool.co.kr'
 };
 
 /*

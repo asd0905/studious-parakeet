@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CCPagingResult} from '../../../libs/cool-library/libs/model/CCPagingResult';
 import {SamRouteService} from '../service/sam-route.service';
 import {SamImageService} from '../service/sam-image.service';
+import {InfinityBase} from '../infinity-base';
+import {StreamsView} from '../../model/streams-view';
 
 export enum SamListType {
     samstory, stream
@@ -32,10 +34,7 @@ export interface SamListProperty {
     templateUrl: './sam-stream-list.component.html',
     styleUrls: ['./sam-stream-list.component.scss']
 })
-export class SamStreamListComponent implements OnInit {
-
-    @Input()
-    pagingResult: CCPagingResult<any>;
+export class SamStreamListComponent extends InfinityBase implements OnInit {
 
     @Input()
     samListProperty: SamListProperty;
@@ -44,6 +43,7 @@ export class SamStreamListComponent implements OnInit {
         private samRouteService: SamRouteService,
         private samImageService: SamImageService
     ) {
+        super();
     }
 
     ngOnInit(): void {
@@ -55,6 +55,10 @@ export class SamStreamListComponent implements OnInit {
 
     imageErrorHandler($event) {
         this.samImageService.imageErrorHandler($event);
+    }
+
+    existAttachByStream(stream: StreamsView) {
+        return this.samImageService.existAttachByStream(stream);
     }
 
 }

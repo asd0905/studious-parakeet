@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SamListProperty, SamListType} from '../../samstory-shared/sam-stream-list/sam-stream-list.component';
 import {ActivatedRoute} from '@angular/router';
+import {CCPagingResult} from '../../../libs/cool-library/libs/model/CCPagingResult';
+import {StreamsView} from '../../model/streams-view';
+import {StreamsService} from '../../samstory-shared/service/streams.service';
+import {UrlService} from '../../shared/services/url.service';
 
 @Component({
     selector: 'app-stream-list',
@@ -9,7 +13,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class StreamListComponent implements OnInit {
 
-    streams: any;
+    resultStreams: CCPagingResult<StreamsView>;
 
     samListProperty: SamListProperty = {
         type: SamListType.stream,
@@ -25,13 +29,21 @@ export class StreamListComponent implements OnInit {
     };
 
     constructor(
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private streamsService: StreamsService,
+        private urlService: UrlService
     ) {
     }
 
     ngOnInit(): void {
         console.log(this.activatedRoute.snapshot);
-        this.streams = this.activatedRoute.snapshot.data.streams;
+        // this.streams = this.activatedRoute.snapshot.data.streams;
+        this.resultStreams = this.activatedRoute.snapshot.data.streams;
+    }
+
+    async onScrollDown() {
+        this.resultStreams.currentPage++;
+        this.resultStreams = await this.streamsService.loadStreamsByResult(this.resultStreams);
     }
 
 }

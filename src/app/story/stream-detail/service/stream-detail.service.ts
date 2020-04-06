@@ -4,8 +4,7 @@ import {CCObjectResult} from '../../../../libs/cool-library/libs/model/CCObjectR
 import {StreamDetail} from '../../../model/stream-detail.model';
 import {
     FIND_STREAM_IMAGE_URL,
-    IMAGE_SERVER_URL,
-    ImageSize,
+    IMAGE_SERVER_URL, ImageType,
     META_DEFAULT_DESCRIPTION,
     META_DEFAULT_IMAGE_URL,
     STREAM_DETAIL_URL,
@@ -56,7 +55,7 @@ export class StreamDetailService {
             const imageServerUrl = IMAGE_SERVER_URL.replace('http:', '').replace('https:', '');
             if (imageResponse.data) {
                 if (imageResponse.data.indexOf(imageServerUrl) === -1) {
-                    return this.samImageService.replaceThumbByUrl(imageResponse.data, ImageSize.FIT);
+                    return this.samImageService.replaceThumbByUrl(imageResponse.data, ImageType.FIT);
                 } else {
                     return imageResponse.data;
                 }
