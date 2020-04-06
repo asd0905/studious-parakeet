@@ -2,5 +2,8 @@
 <app-sam-stream-list
         [pagingResult]="resultStreams"
         [samListProperty]="samListProperty"
-        (scrollDown)="onScrollDown()">
+        (scrollDown)="onScrollDown()"
+
+        (clickStreamEvent)="storePageMeta()"
+        (afterViewInit)="restorePageMeta()">
 </app-sam-stream-list>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CCPagingResult} from '../../../libs/cool-library/libs/model/CCPagingResult';
+import {CCPagingResult} from '../../libs/cool-library/libs/model/CCPagingResult';
 import {Location} from '@angular/common';
 import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CCPagingResult} from '../../../libs/cool-library/libs/model/CCPagingResult';
 import {SamRouteService} from '../service/sam-route.service';
 import {SamImageService} from '../service/sam-image.service';
@@ -38,6 +38,8 @@ export class SamStreamListComponent extends InfinityBase implements OnInit {
 
     @Input()
     samListProperty: SamListProperty;
+    @Output()
+    clickStreamEvent = new EventEmitter();
 
     constructor(
         private samRouteService: SamRouteService,
@@ -55,6 +57,10 @@ export class SamStreamListComponent extends InfinityBase implements OnInit {
 
     imageErrorHandler($event) {
         this.samImageService.imageErrorHandler($event);
+    }
+
+    clickStream() {
+        this.clickStreamEvent.emit();
     }
 
     existAttachByStream(stream: StreamsView) {

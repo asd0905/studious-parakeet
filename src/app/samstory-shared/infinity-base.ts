@@ -1,7 +1,7 @@
-import {OnChanges, Input, Output, EventEmitter, HostListener, SimpleChanges} from '@angular/core';
+import {OnChanges, Input, Output, EventEmitter, HostListener, SimpleChanges, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
 import {CCPagingResult} from '../../libs/cool-library/libs/model/CCPagingResult';
 
-export class InfinityBase implements OnChanges {
+export class InfinityBase implements OnChanges, AfterViewInit {
 
     protected isLoaded: boolean;
     @Input()
@@ -10,6 +10,8 @@ export class InfinityBase implements OnChanges {
     protected scrollDown = new EventEmitter();
     @Output()
     afterViewInit = new EventEmitter();
+    @ViewChildren('listRef')
+    listRef: QueryList<any>;
 
     @HostListener('window:scroll', ['$event'])
     onResize(event) {
@@ -30,5 +32,9 @@ export class InfinityBase implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.isLoaded = true;
+    }
+
+    ngAfterViewInit(): void {
+        this.afterViewInit.emit();
     }
 }

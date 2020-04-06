@@ -46,4 +46,13 @@ export class StreamListComponent implements OnInit {
         this.resultStreams = await this.streamsService.loadStreamsByResult(this.resultStreams);
     }
 
+    storePageMeta() {
+        this.streamsService.storePageMeta(this.resultStreams);
+    }
+
+    restorePageMeta() {
+        this.streamsService.restoreScrollPageMeta();
+        this.streamsService.pageMetaClear();
+    }
+
 }

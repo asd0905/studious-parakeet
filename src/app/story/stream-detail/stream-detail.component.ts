@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {StreamDetail} from '../../model/stream-detail.model';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {StreamDetailService} from './service/stream-detail.service';
+import {Location} from '@angular/common';
 
 
 @Component({

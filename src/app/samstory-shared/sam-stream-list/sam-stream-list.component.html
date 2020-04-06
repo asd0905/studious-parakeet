@@ -1,7 +1,7 @@
 <div class="sam-stream-list">
     <div class="stream-list">
         <div *ngFor="let item of pagingResult?.data" #listRef>
-            <a [routerLink]="getHrefForStream(item)">
+            <a [routerLink]="getHrefForStream(item)" (click)="clickStream()">
                 <div class="img">
                     <img [src]="item[samListProperty.image]" alt="img" (error)="imageErrorHandler($event)"/>
                 </div>

@@ -1,5 +1,5 @@
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {StorageHelper} from '../../libs/cool-library/libs/storage-helper';
+import {StorageHelper} from '../../../libs/cool-library/libs/storage-helper';
 import {isPlatformBrowser} from '@angular/common';
 
 @Injectable({
