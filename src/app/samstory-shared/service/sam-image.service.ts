@@ -21,7 +21,7 @@ export class SamImageService {
         if (isPlatformServer((this.platform))) {
             return IMAGE_SERVER_URL;
         }
-        return IMAGE_SERVER_URL.replace('http', '');
+        return IMAGE_SERVER_URL.replace('http:', '');
     }
 
     /**
@@ -31,7 +31,7 @@ export class SamImageService {
      */
     private makeImageUrl(type: ImageType, url: string) {
         const imageServerUrl = this.getImageServerUrl();
-        return `${imageServerUrl}/image/${type}?url=${encodeURIComponent(url)}`;
+        return `${imageServerUrl}/image/${type}?url=${encodeURIComponent(url)}&w=766`;
     }
 
     /**
@@ -110,6 +110,49 @@ export class SamImageService {
             return false;
         }
         return (stream.attachName && stream.attachName !== null) || (stream.imageSrc && stream.imageSrc !== null) || (stream.imageUrl && stream.imageUrl !== null);
+    }
+
+    /**
+     * 컨텐츠에 있는 image를 cache image server url로 바꿈
+     * @param contents 컨텐츠
+     * @param type 타입
+     */
+    replaceThumbByContents(contents: string, type: ImageType = ImageType.FIT) {
+        if (!IMAGE_SERVER_FLAG) {
+            return contents;
+        }
+        if (isPlatformServer(this.platform)) {
+            return contents;
+        }
+        const startTime = new Date().getTime();
+        let $contents = '';
+        try {
+            if ($(contents).length > 0) {
+                contents = `<div>${contents}</div>`;
+                $contents = $(contents)
+                    .wrapAll(`<div></div>`)
+                    .find('img')
+                    .attr('src', (i, src) => {
+                        if (src.startsWidth && src.startsWith('data:image')) {
+                            return src;
+                        } else if (src.indexOf('data:image') !== -1) {
+                            return src;
+                        }
+                        return this.makeImageUrl(type, src);
+                    })
+                    .end()
+                    .html();
+            } else {
+                $contents = contents;
+            }
+        } catch (e) {
+            if (console) {
+                console.warn(e);
+            }
+            return contents;
+        }
+        const endTime = new Date().getTime();
+        return $contents;
     }
 
     imageErrorHandler($event) {

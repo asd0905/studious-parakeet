@@ -28,8 +28,13 @@ export class StreamDetailService {
     ) {
     }
 
-    loadStreamDetail(streamId: number) {
-        return this.httpClient.get<CCObjectResult<StreamDetail>>(`${STREAM_DETAIL_URL}/${streamId}`).toPromise();
+    async loadStreamDetail(streamId: number) {
+        // return this.httpClient.get<CCObjectResult<StreamDetail>>(`${STREAM_DETAIL_URL}/${streamId}`).toPromise();
+        const result = await this.httpClient.get<CCObjectResult<StreamDetail>>(`${STREAM_DETAIL_URL}/${streamId}`).toPromise();
+        if (result.data.contents) {
+            result.data.contents = this.samImageService.replaceThumbByContents(result.data.contents);
+        }
+        return result;
     }
 
     async setWebMeta(streamDetail: StreamDetail) {
